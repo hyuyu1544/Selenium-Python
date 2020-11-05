@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  hub:
+    restart: always
+    image: selenium/hub:3.14.0
+    logging:
+      options:
+        max-size: "200m"
+        max-file: "3"
+      driver: json-file
+  chrome:
+    restart: always
+    image: selenium/node-chrome-debug:3.14.0
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+    logging:
+      options:
+        max-size: "200m"
+        max-file: "3"
+      driver: json-file
+  crawler:
+    image: selenium-python:latest
+    command: python example.py
+    depends_on:
+      - hub
+    restart: always
