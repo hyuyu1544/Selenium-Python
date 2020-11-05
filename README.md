@@ -1,6 +1,13 @@
 # Selenium-Python
-Selenium-Python
+Implement selenium in python for web crawling.
 
+## Setup
+
+Download the repo, then
+
+```
+pip install -r requirements.txt
+```
 
 ## Demonstration
 
